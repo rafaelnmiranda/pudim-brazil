@@ -48,7 +48,7 @@ export function PhotoCarousel({
 
   return (
     <div className={cn("relative w-full flex flex-col items-center", className)}>
-      <div className="relative aspect-[4/3] w-full max-w-4xl overflow-hidden rounded-3xl border border-border bg-background shadow-2xl ring-1 ring-black/5">
+      <div className="relative aspect-[4/3] w-full max-w-2xl overflow-hidden rounded-3xl border border-border bg-background shadow-2xl ring-1 ring-black/5">
         {images.map((image, index) => (
           <div
             key={index}
@@ -62,7 +62,7 @@ export function PhotoCarousel({
               alt={image.alt}
               fill
               className="object-cover"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1024px"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 672px"
               priority={index === 0}
             />
           </div>
