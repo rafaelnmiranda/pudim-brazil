@@ -75,27 +75,17 @@ export default function ExperienciaPage() {
           </div>
           <div className="md:col-span-5">
             <div className="relative overflow-hidden rounded-3xl border border-border bg-background">
-              <div className="relative aspect-[4/3]">
+              <div className="relative aspect-[3/4]">
                 {media.instructions && (
                   <Image
                     src={media.instructions}
                     alt=""
                     fill
-                    className="object-cover object-top"
+                    className="object-cover object-bottom"
                     sizes="(min-width: 768px) 40vw, 100vw"
                     aria-hidden="true"
                   />
                 )}
-              </div>
-              <div className="absolute inset-0 grid place-items-start p-6">
-                <div className="rounded-2xl border border-border bg-background/70 px-4 py-3 backdrop-blur">
-                  <p className="text-xs tracking-[0.28em] uppercase text-muted">
-                    Arte / instruções aqui
-                  </p>
-                  <p className="mt-1 text-sm text-foreground">
-                    (substituir via assets)
-                  </p>
-                </div>
               </div>
             </div>
           </div>

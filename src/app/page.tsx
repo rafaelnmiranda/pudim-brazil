@@ -4,6 +4,9 @@ import { Section } from "@/components/Section";
 import { ButtonLink } from "@/components/Button";
 import { getWhatsAppLink } from "@/lib/whatsapp";
 import { media } from "@/content/media";
+import { PhotoCarousel } from "@/components/PhotoCarousel";
+import { productCategories } from "@/content/products";
+// import { InstagramEmbed } from "@/components/InstagramEmbed";
 
 export default function Home() {
   return (
@@ -113,29 +116,48 @@ export default function Home() {
               {
                 title: "Pedido",
                 desc: "Você consulta sabores, tamanhos e agenda via WhatsApp.",
+                image: "/assets/produto-mini.jpg",
               },
               {
                 title: "Preparação",
                 desc: "Produção artesanal, com controle de textura e acabamento.",
+                image: "/assets/produto-pequeno.jpg",
               },
               {
                 title: "Entrega",
                 desc: "Chega com cuidado, estabilidade e apresentação impecável.",
+                image: "/assets/produto-medio.jpg",
               },
               {
                 title: "Momento",
                 desc: "Desenforme com as instruções e viva a experiência completa.",
+                image: "/assets/produto-grande.jpg",
               },
             ].map((step, idx) => (
               <div
                 key={step.title}
-                className="rounded-3xl border border-border bg-background p-6"
+                className="relative overflow-hidden rounded-3xl border border-border bg-background p-6"
               >
-                <p className="text-xs tracking-[0.28em] uppercase text-muted">
-                  {String(idx + 1).padStart(2, "0")}
-                </p>
-                <p className="mt-3 font-medium">{step.title}</p>
-                <p className="mt-2 text-sm leading-7 text-muted">{step.desc}</p>
+                <div className="absolute inset-0 opacity-25 [background-image:radial-gradient(color-mix(in_oklab,var(--pb-gold)_26%,transparent)_1px,transparent_1px)] [background-size:18px_18px]" />
+                <div className="relative">
+                  <p className="text-xs tracking-[0.28em] uppercase text-muted">
+                    {String(idx + 1).padStart(2, "0")}
+                  </p>
+                  <p className="mt-3 font-medium">{step.title}</p>
+                  <p className="mt-2 text-sm leading-7 text-muted">{step.desc}</p>
+                </div>
+                {step.image && (
+                  <div className="relative mt-4 aspect-[4/3] overflow-hidden rounded-2xl">
+                    <Image
+                      src={step.image}
+                      alt=""
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 768px) 25vw, 100vw"
+                      aria-hidden="true"
+                    />
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -223,12 +245,12 @@ export default function Home() {
           <div className="md:col-span-6">
             {/* Placeholder de imagem: substituiremos por foto real do casal em public/assets/ */}
             <div className="relative overflow-hidden rounded-3xl border border-border bg-background">
-              <div className="relative aspect-[4/3]">
+              <div className="relative aspect-[3/4]">
                 <Image
                   src={media.founders || "/assets/photo-placeholder.svg"}
                   alt=""
                   fill
-                  className="object-cover object-top"
+                  className="object-cover object-bottom"
                   sizes="(min-width: 768px) 50vw, 100vw"
                   aria-hidden="true"
                 />
@@ -261,38 +283,125 @@ export default function Home() {
           </div>
 
           <div className="mt-10 grid gap-5 md:grid-cols-4">
+            {productCategories.map((category) => {
+              const productImage = category.items[0]?.imageSrc || media.product || "/assets/product-placeholder.svg";
+              return (
+                <div
+                  key={category.id}
+                  className="relative overflow-hidden rounded-3xl border border-border bg-background"
+                >
+                  {/* Product Image */}
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image
+                      src={productImage}
+                      alt=""
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 768px) 25vw, 100vw"
+                      aria-hidden="true"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="relative p-6">
+                    <p className="font-medium">{category.title}</p>
+                    <p className="mt-2 text-sm leading-7 text-muted">
+                      {category.subtitle}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </Container>
+      </Section>
+
+      {/* CARROSSEL DE FOTOS */}
+      <Section>
+        <Container>
+          <div className="max-w-3xl">
+            <p className="text-xs tracking-[0.28em] uppercase text-muted">
+              Galeria
+            </p>
+            <h2 className="mt-4 font-serif text-3xl tracking-tight sm:text-4xl">
+              Momentos especiais em cada pudim.
+            </h2>
+            <p className="mt-4 text-base leading-8 text-muted">
+              Cada criação é única, cada apresentação é pensada para impressionar.
+            </p>
+          </div>
+
+          <div className="mt-10">
+            <PhotoCarousel
+              images={[
+                {
+                  src: "/assets/carrossel-01.jpeg",
+                  alt: "Pudim Brazil - Momentos especiais",
+                },
+                {
+                  src: "/assets/carrossel-02.jpeg",
+                  alt: "Pudim Brazil - Apresentação impecável",
+                },
+                {
+                  src: "/assets/carrossel-03.jpeg",
+                  alt: "Pudim Brazil - Textura cremosa",
+                },
+                {
+                  src: "/assets/carrossel-04.jpeg",
+                  alt: "Pudim Brazil - Experiência única",
+                },
+                {
+                  src: "/assets/carrossel-05.jpeg",
+                  alt: "Pudim Brazil - Tradição e qualidade",
+                },
+              ]}
+            />
+          </div>
+        </Container>
+      </Section>
+
+      {/* INSTAGRAM POSTS - OCULTO */}
+      {/* <Section className="bg-[linear-gradient(180deg,transparent,color-mix(in_oklab,var(--pb-gold)_8%,transparent))]">
+        <Container>
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-3xl">
+              <p className="text-xs tracking-[0.28em] uppercase text-muted">
+                Instagram
+              </p>
+              <h2 className="mt-4 font-serif text-3xl tracking-tight sm:text-4xl">
+                Siga-nos no Instagram
+              </h2>
+              <p className="mt-4 text-base leading-8 text-muted">
+                Acompanhe nossos pudins, momentos especiais e novidades em tempo real.
+              </p>
+            </div>
+            <a
+              href="https://www.instagram.com/pudimbrazil/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-border bg-background px-6 text-sm font-medium text-foreground hover:bg-gold/10 transition-colors"
+            >
+              @pudimbrazil
+            </a>
+          </div>
+
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
             {[
-              { title: "Mini / Individual", note: "Para um momento só seu." },
-              { title: "Pequeno", note: "Perfeito para compartilhar a dois." },
-              { title: "Médio", note: "Para encontros especiais." },
-              { title: "Grande", note: "A mesa vira um evento." },
-            ].map((card) => (
+              "https://www.instagram.com/p/DKqLys4RgAV/",
+              "https://www.instagram.com/p/DLZ9ARdRPNS/",
+              "https://www.instagram.com/p/DPkOIqWkjlw/",
+            ].map((url) => (
               <div
-                key={card.title}
-                className="relative overflow-hidden rounded-3xl border border-border bg-background p-6"
+                key={url}
+                className="overflow-hidden rounded-3xl border border-border bg-background"
               >
-                <div className="pointer-events-none absolute inset-0">
-                  <Image
-                    src={media.product || "/assets/product-placeholder.svg"}
-                    alt=""
-                    fill
-                    className="object-cover opacity-[0.18]"
-                    sizes="(min-width: 768px) 25vw, 100vw"
-                    aria-hidden="true"
-                  />
-                </div>
-                <div className="absolute inset-0 opacity-25 [background-image:radial-gradient(color-mix(in_oklab,var(--pb-gold)_26%,transparent)_1px,transparent_1px)] [background-size:18px_18px]" />
-                <div className="relative">
-                  <p className="font-medium">{card.title}</p>
-                  <p className="mt-2 text-sm leading-7 text-muted">
-                    {card.note}
-                  </p>
-                </div>
+                <InstagramEmbed url={url} />
               </div>
             ))}
           </div>
         </Container>
-      </Section>
+      </Section> */}
 
       {/* CTA FINAL */}
       <Section spacing="airy" className="bg-[linear-gradient(180deg,transparent,color-mix(in_oklab,var(--pb-gold)_10%,transparent))]">

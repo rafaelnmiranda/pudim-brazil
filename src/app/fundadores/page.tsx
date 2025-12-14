@@ -114,26 +114,21 @@ export default function FundadoresPage() {
           <div className="md:col-span-5">
             {/* Placeholder para fotos reais do casal (quando assets forem copiados). */}
             <div className="space-y-5">
-              <div className="relative overflow-hidden rounded-3xl border border-border bg-background">
-                <div className="relative aspect-[4/5]">
-                  <Image
-                    src={media.founders || "/assets/photo-placeholder.svg"}
-                    alt="Marcelo e Louise, fundadores da Pudim Brazil"
-                    fill
-                    className="object-cover object-bottom"
-                    sizes="(min-width: 768px) 40vw, 100vw"
-                  />
-                </div>
-                <div className="absolute inset-0 grid place-items-end p-6">
-                  <div className="rounded-2xl border border-border bg-background/70 px-4 py-3 backdrop-blur">
-                    <p className="text-xs tracking-[0.28em] uppercase text-muted">
-                      Foto do casal
-                    </p>
-                    <p className="mt-1 text-sm text-foreground">
-                      Marcelo e Louise
-                    </p>
+              <div>
+                <div className="relative overflow-hidden rounded-3xl border border-border bg-background">
+                  <div className="relative aspect-[333/470]">
+                    <Image
+                      src={media.founders || "/assets/photo-placeholder.svg"}
+                      alt="Marcelo e Louise, fundadores da Pudim Brazil"
+                      fill
+                      className="object-cover object-bottom"
+                      sizes="(min-width: 768px) 40vw, 100vw"
+                    />
                   </div>
                 </div>
+                <p className="mt-3 text-xs text-muted text-center">
+                  Marcelo e Louise
+                </p>
               </div>
 
               <div className="rounded-3xl border border-border bg-background p-6">
