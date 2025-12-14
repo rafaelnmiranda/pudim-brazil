@@ -76,14 +76,16 @@ export default function ExperienciaPage() {
           <div className="md:col-span-5">
             <div className="relative overflow-hidden rounded-3xl border border-border bg-background">
               <div className="relative aspect-[4/3]">
-                <Image
-                  src={media.instructions}
-                  alt=""
-                  fill
-                  className="object-cover object-top"
-                  sizes="(min-width: 768px) 40vw, 100vw"
-                  aria-hidden="true"
-                />
+                {media.instructions && (
+                  <Image
+                    src={media.instructions}
+                    alt=""
+                    fill
+                    className="object-cover object-top"
+                    sizes="(min-width: 768px) 40vw, 100vw"
+                    aria-hidden="true"
+                  />
+                )}
               </div>
               <div className="absolute inset-0 grid place-items-start p-6">
                 <div className="rounded-2xl border border-border bg-background/70 px-4 py-3 backdrop-blur">
