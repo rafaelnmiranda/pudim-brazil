@@ -51,7 +51,7 @@ export default function ProdutosPage() {
                     {/* Placeholder de mídia: preencha imageSrc quando os assets chegarem */}
                     <div className="relative aspect-[4/3]">
                       <Image
-                        src={p.imageSrc ?? media.product}
+                        src={p.imageSrc ?? media.product ?? "/assets/product-placeholder.svg"}
                         alt=""
                         fill
                         className="object-cover"

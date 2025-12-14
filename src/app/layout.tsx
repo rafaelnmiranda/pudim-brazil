@@ -32,21 +32,23 @@ export const metadata: Metadata = {
     title: "Pudim Brazil | Um pedaço do céu em forma de pudim",
     description:
       "Pudins artesanais premium, com sofisticação e cuidado em cada detalhe. Pedido exclusivo via WhatsApp.",
-    images: [
-      {
-        url: media.hero,
-        width: 1600,
-        height: 1000,
-        alt: "Pudim Brazil",
-      },
-    ],
+    images: media.hero
+      ? [
+          {
+            url: media.hero,
+            width: 1600,
+            height: 1000,
+            alt: "Pudim Brazil",
+          },
+        ]
+      : [],
   },
   twitter: {
     card: "summary_large_image",
     title: "Pudim Brazil | Um pedaço do céu em forma de pudim",
     description:
       "Pudins artesanais premium, com sofisticação e cuidado em cada detalhe. Pedido exclusivo via WhatsApp.",
-    images: [media.hero],
+    images: media.hero ? [media.hero] : [],
   },
 };
 
