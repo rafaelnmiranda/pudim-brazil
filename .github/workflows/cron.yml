@@ -1,0 +1,43 @@
+name: Cron Job - Build e Lint
+
+on:
+  schedule:
+    # Executa diariamente às 2h da manhã (UTC)
+    # Ajuste o horário conforme necessário usando https://crontab.guru/
+    - cron: '0 2 * * *'
+  # Também permite execução manual
+  workflow_dispatch:
+
+jobs:
+  build-and-lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Executar lint
+        run: npm run lint
+
+      - name: Build do projeto
+        run: npm run build
+        env:
+          # Adicione variáveis de ambiente aqui se necessário
+          # NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+
+      - name: Notificar sucesso
+        if: success()
+        run: echo "✅ Build e lint executados com sucesso!"
+
+      - name: Notificar falha
+        if: failure()
+        run: echo "❌ Falha no build ou lint!"

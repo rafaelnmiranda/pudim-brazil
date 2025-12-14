@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+:root {
+  /* Pudim Brazil — tokens base (light) */
+  --pb-paper: #fbf6ee; /* off-white quente */
+  --pb-ink: #1a1410; /* espresso */
+  --pb-muted: #6f6259; /* texto secundário */
+  --pb-gold: #c9a24a; /* dourado premium */
+  --pb-gold-soft: #ead9b4; /* dourado suave (detalhes) */
+  --pb-caramel: #b26a3a;
+  --pb-cocoa: #4a2b1e;
+  --pb-wine: #7b1f2d; /* frutas vermelhas */
+  --pb-border: color-mix(in oklab, var(--pb-ink) 12%, transparent);
+
+  /* Alias semântico (usado pelos tokens do Tailwind) */
+  --background: var(--pb-paper);
+  --foreground: var(--pb-ink);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-paper: var(--pb-paper);
+  --color-ink: var(--pb-ink);
+  --color-muted: var(--pb-muted);
+  --color-gold: var(--pb-gold);
+  --color-goldSoft: var(--pb-gold-soft);
+  --color-caramel: var(--pb-caramel);
+  --color-cocoa: var(--pb-cocoa);
+  --color-wine: var(--pb-wine);
+  --color-border: var(--pb-border);
+
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Pudim Brazil — tokens base (dark) */
+    --pb-paper: #0f0c0a;
+    --pb-ink: #f2eee9;
+    --pb-muted: #b9aea4;
+    --pb-gold: #d8ba6a;
+    --pb-gold-soft: #4b3b18;
+    --pb-caramel: #d18a5a;
+    --pb-cocoa: #caa48f;
+    --pb-wine: #e08593;
+    --pb-border: color-mix(in oklab, var(--pb-ink) 16%, transparent);
+
+    --background: var(--pb-paper);
+    --foreground: var(--pb-ink);
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Refinos globais */
+::selection {
+  background: color-mix(in oklab, var(--pb-gold) 35%, transparent);
+}
+
+/* Acessibilidade: foco visível consistente */
+:focus-visible {
+  outline: 2px solid color-mix(in oklab, var(--pb-gold) 70%, white);
+  outline-offset: 3px;
+}
+
+@keyframes pbFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pbShimmer {
+  0% {
+    transform: translateX(-30%);
+  }
+  100% {
+    transform: translateX(30%);
+  }
+}

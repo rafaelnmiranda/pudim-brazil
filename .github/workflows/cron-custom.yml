@@ -1,0 +1,73 @@
+name: Cron Job - Tarefas Customizadas
+
+on:
+  schedule:
+    # Exemplos de horários (ajuste conforme necessário):
+    # '0 0 * * *' - Diariamente à meia-noite UTC
+    # '0 */6 * * *' - A cada 6 horas
+    # '0 9 * * 1' - Toda segunda-feira às 9h UTC
+    # '0 0 1 * *' - Primeiro dia de cada mês à meia-noite UTC
+    - cron: '0 2 * * *'  # Diariamente às 2h UTC
+  workflow_dispatch:
+    inputs:
+      task:
+        description: 'Tarefa a executar'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - build
+          - lint
+          - test
+
+jobs:
+  custom-tasks:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Executar tarefa selecionada
+        run: |
+          TASK="${{ github.event.inputs.task || 'all' }}"
+          
+          case $TASK in
+            build)
+              echo "🔨 Executando build..."
+              npm run build
+              ;;
+            lint)
+              echo "🔍 Executando lint..."
+              npm run lint
+              ;;
+            test)
+              echo "🧪 Executando testes..."
+              # Adicione seu comando de teste aqui quando disponível
+              echo "⚠️ Testes não configurados ainda"
+              ;;
+            all)
+              echo "🚀 Executando todas as tarefas..."
+              npm run lint
+              npm run build
+              ;;
+          esac
+        env:
+          # Adicione variáveis de ambiente aqui se necessário
+          # NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+
+      - name: Resumo
+        if: always()
+        run: |
+          echo "✅ Tarefa cron executada em $(date)"
+          echo "📅 Próxima execução agendada conforme configuração do cron"
