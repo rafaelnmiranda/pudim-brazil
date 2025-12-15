@@ -111,7 +111,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-4">
+          <div className="mt-10 grid gap-5 md:grid-cols-4 md:items-stretch">
             {[
               {
                 title: "Pedido",
@@ -136,18 +136,18 @@ export default function Home() {
             ].map((step, idx) => (
               <div
                 key={step.title}
-                className="relative overflow-hidden rounded-3xl border border-border bg-background p-6"
+                className="relative flex flex-col overflow-hidden rounded-3xl border border-border bg-background p-6"
               >
                 <div className="absolute inset-0 opacity-25 [background-image:radial-gradient(color-mix(in_oklab,var(--pb-gold)_26%,transparent)_1px,transparent_1px)] [background-size:18px_18px]" />
-                <div className="relative">
+                <div className="relative flex flex-col min-h-[7.5rem]">
                   <p className="text-xs tracking-[0.28em] uppercase text-muted">
                     {String(idx + 1).padStart(2, "0")}
                   </p>
                   <p className="mt-3 font-medium">{step.title}</p>
-                  <p className="mt-2 text-sm leading-7 text-muted">{step.desc}</p>
+                  <p className="mt-2 text-sm leading-7 text-muted flex-grow">{step.desc}</p>
                 </div>
                 {step.image && (
-                  <div className="relative mt-4 aspect-[4/3] overflow-hidden rounded-2xl">
+                  <div className="relative mt-4 aspect-[4/3] overflow-hidden rounded-2xl flex-shrink-0">
                     <Image
                       src={step.image}
                       alt=""
