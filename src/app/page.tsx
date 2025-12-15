@@ -284,7 +284,7 @@ export default function Home() {
 
           <div className="mt-10 grid gap-5 md:grid-cols-4">
             {productCategories.map((category) => {
-              const productImage = category.items[0]?.imageSrc || media.product || "/assets/product-placeholder.svg";
+              const productImage = category.imageSrc || media.product || "/assets/product-placeholder.svg";
               return (
                 <div
                   key={category.id}

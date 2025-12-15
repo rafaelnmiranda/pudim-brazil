@@ -3,7 +3,7 @@ import { Container } from "@/components/Container";
 import { PageHeader } from "@/components/PageHeader";
 import { Section } from "@/components/Section";
 import { ButtonLink } from "@/components/Button";
-import { getWhatsAppLink, WHATSAPP_PHONE_E164 } from "@/lib/whatsapp";
+import { getWhatsAppLink, WHATSAPP_PHONE_FORMATTED } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   title: "Contato",
@@ -27,9 +27,14 @@ export default function ContatoPage() {
             <p className="text-xs tracking-[0.28em] uppercase text-muted">
               WhatsApp
             </p>
-            <p className="mt-4 font-serif text-3xl tracking-tight sm:text-4xl">
-              {WHATSAPP_PHONE_E164}
-            </p>
+            <a
+              href={getWhatsAppLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 block font-serif text-3xl tracking-tight sm:text-4xl hover:text-gold transition-colors cursor-pointer"
+            >
+              {WHATSAPP_PHONE_FORMATTED}
+            </a>
             <p className="mt-4 text-base leading-8 text-muted">
               Clique abaixo para consultar sabores, tamanhos e agenda de
               entregas.
